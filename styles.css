@@ -1,0 +1,661 @@
+/* CSS Custom Properties for Theming */
+:root {
+    /* Cherry Blossom Theme (Default) */
+    --primary-bg: linear-gradient(135deg, #ffeef8 0%, #f8d7da 50%, #fce4ec 100%);
+    --secondary-bg: rgba(255, 255, 255, 0.8);
+    --accent-bg: rgba(255, 182, 193, 0.3);
+    --text-primary: #4a4a4a;
+    --text-secondary: #666;
+    --text-accent: #d63384;
+    --border-color: rgba(255, 182, 193, 0.5);
+    --shadow: 0 4px 20px rgba(255, 182, 193, 0.3);
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --input-bg: rgba(255, 255, 255, 0.95);
+    --button-primary: #ff6b9d;
+    --button-secondary: #ffb3d1;
+    --success: #28a745;
+    --danger: #dc3545;
+}
+
+/* Night Sky Theme */
+[data-theme="night-sky"] {
+    --primary-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    --secondary-bg: rgba(30, 30, 60, 0.9);
+    --accent-bg: rgba(100, 149, 237, 0.3);
+    --text-primary: #e8e8e8;
+    --text-secondary: #b8b8b8;
+    --text-accent: #6495ed;
+    --border-color: rgba(100, 149, 237, 0.5);
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    --card-bg: rgba(30, 30, 60, 0.9);
+    --input-bg: rgba(40, 40, 70, 0.95);
+    --button-primary: #6495ed;
+    --button-secondary: #8fbc8f;
+    --success: #32cd32;
+    --danger: #ff6347;
+}
+
+/* Forest Theme */
+[data-theme="forest"] {
+    --primary-bg: linear-gradient(135deg, #a8e6cf 0%, #7fcdcd 50%, #81c784 100%);
+    --secondary-bg: rgba(255, 255, 255, 0.85);
+    --accent-bg: rgba(129, 199, 132, 0.3);
+    --text-primary: #2e7d32;
+    --text-secondary: #388e3c;
+    --text-accent: #4caf50;
+    --border-color: rgba(129, 199, 132, 0.5);
+    --shadow: 0 4px 20px rgba(76, 175, 80, 0.3);
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --input-bg: rgba(255, 255, 255, 0.95);
+    --button-primary: #4caf50;
+    --button-secondary: #81c784;
+    --success: #388e3c;
+    --danger: #f44336;
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background: var(--primary-bg);
+    min-height: 100vh;
+    transition: all 0.3s ease;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Header Styles */
+.header {
+    background: var(--secondary-bg);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.app-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    color: var(--text-accent);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.header-controls {
+    display: flex;
+    gap: 1rem;
+}
+
+.theme-toggle,
+.private-toggle {
+    background: var(--accent-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.theme-toggle:hover,
+.private-toggle:hover {
+    background: var(--button-secondary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+/* Theme Selector */
+.theme-selector {
+    position: absolute;
+    top: 80px;
+    right: 2rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    padding: 1rem;
+    box-shadow: var(--shadow);
+    transform: translateY(-10px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 99;
+}
+
+.theme-selector.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.theme-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.theme-option {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: left;
+}
+
+.theme-option:hover {
+    background: var(--accent-bg);
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+}
+
+/* Diary Section */
+.diary-section {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.diary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.diary-header h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    color: var(--text-accent);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.date-display {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.diary-content {
+    transition: all 0.3s ease;
+}
+
+.entry-list {
+    margin-bottom: 2rem;
+}
+
+.diary-entry {
+    background: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.entry-date {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.entry-delete {
+    background: none;
+    border: none;
+    color: var(--danger);
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.entry-delete:hover {
+    background: rgba(220, 53, 69, 0.1);
+}
+
+.entry-text {
+    color: var(--text-primary);
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+.new-entry textarea {
+    width: 100%;
+    background: var(--input-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 15px;
+    padding: 1rem;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--text-primary);
+    resize: vertical;
+    min-height: 120px;
+    transition: all 0.3s ease;
+}
+
+.new-entry textarea:focus {
+    outline: none;
+    border-color: var(--text-accent);
+    box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1);
+}
+
+.entry-controls {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.save-entry,
+.clear-entry {
+    background: var(--button-primary);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+}
+
+.clear-entry {
+    background: var(--danger);
+}
+
+.save-entry:hover,
+.clear-entry:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+/* Private Mode Overlay */
+.private-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--card-bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.private-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.private-message {
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+.private-message i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--text-accent);
+}
+
+/* Timer Section */
+.timer-section {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.timer-tabs {
+    display: flex;
+    margin-bottom: 2rem;
+    background: var(--accent-bg);
+    border-radius: 15px;
+    padding: 0.25rem;
+}
+
+.tab-button {
+    flex: 1;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 500;
+}
+
+.tab-button.active {
+    background: var(--button-primary);
+    color: white;
+    box-shadow: var(--shadow);
+}
+
+.timer-content {
+    display: none;
+    text-align: center;
+}
+
+.timer-content.active {
+    display: block;
+}
+
+.timer-display {
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--text-accent);
+    margin: 2rem 0;
+    font-family: 'Courier New', monospace;
+    background: var(--accent-bg);
+    padding: 1rem;
+    border-radius: 15px;
+    border: 2px solid var(--border-color);
+}
+
+.timer-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.control-btn {
+    background: var(--button-primary);
+    color: white;
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.control-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.control-btn.pause {
+    background: var(--button-secondary);
+}
+
+.control-btn.reset {
+    background: var(--danger);
+}
+
+/* Timer Setup */
+.timer-setup {
+    margin-bottom: 2rem;
+}
+
+.time-inputs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.time-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.time-input label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.time-input input {
+    width: 60px;
+    padding: 0.5rem;
+    background: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+.time-input input:focus {
+    outline: none;
+    border-color: var(--text-accent);
+}
+
+/* Lap functionality */
+.laps {
+    margin-top: 2rem;
+}
+
+.lap-btn {
+    background: var(--button-secondary);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 auto 1rem;
+    font-weight: 500;
+}
+
+.lap-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.lap-times {
+    max-height: 200px;
+    overflow-y: auto;
+    background: var(--accent-bg);
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.lap-time {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+    font-family: 'Courier New', monospace;
+}
+
+.lap-time:last-child {
+    border-bottom: none;
+}
+
+/* Footer */
+.footer {
+    background: var(--secondary-bg);
+    padding: 1rem 2rem;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header {
+        padding: 1rem;
+    }
+    
+    .app-title {
+        font-size: 1.5rem;
+    }
+    
+    .header-controls {
+        gap: 0.5rem;
+    }
+    
+    .main-content {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+        gap: 1rem;
+    }
+    
+    .diary-section,
+    .timer-section {
+        padding: 1.5rem;
+    }
+    
+    .timer-display {
+        font-size: 2.5rem;
+    }
+    
+    .control-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1rem;
+    }
+    
+    .theme-selector {
+        right: 1rem;
+        left: 1rem;
+        right: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        padding: 0.5rem;
+    }
+    
+    .app-title {
+        font-size: 1.2rem;
+    }
+    
+    .main-content {
+        padding: 0.5rem;
+    }
+    
+    .diary-section,
+    .timer-section {
+        padding: 1rem;
+    }
+    
+    .timer-display {
+        font-size: 2rem;
+    }
+    
+    .time-inputs {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .entry-controls {
+        flex-direction: column;
+    }
+    
+    .save-entry,
+    .clear-entry {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.diary-entry {
+    animation: fadeIn 0.3s ease;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--accent-bg);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-accent);
+}
